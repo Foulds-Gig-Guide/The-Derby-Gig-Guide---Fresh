@@ -17,7 +17,6 @@ export default function Home() {
         .gte('date', new Date().toISOString().split('T')[0])
         .order('date', { ascending: true })
         .limit(20);
-
       if (error) console.error(error);
       else setEvents(data);
       setLoading(false);
@@ -36,13 +35,21 @@ export default function Home() {
           </a>
         </div>
       </section>
+
       <div id="upcoming-gigs" className="container mx-auto py-8">
         <h2 className="text-3xl font-bold mb-6">Upcoming Gigs</h2>
-        {loading ? (<p>Loading upcoming events...</p>) : events.length > 0 ? (
+        {loading ? (
+          <p>Loading upcoming events...</p>
+        ) : events.length > 0 ? (
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {events.map(event => <EventCard key={event.id} event={event} />)}
+            {events.map(event => (
+              <EventCard key={event.id} event={event} />
+            ))}
           </div>
-        ) : (<p>No upcoming gigs found.</p>)}
+        ) : (
+          <p>No upcoming gigs found.</p>
+        )}
       </div>
     </Layout>
+  );
 }
